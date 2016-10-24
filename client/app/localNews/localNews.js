@@ -1,24 +1,39 @@
 angular.module('inews.localNews', [])
 
 .controller('localNewsController', function($scope, News, $location, geolocate) {
-  $scope.news = {};
-  $scope.position = '';
-  
-  geolocate.getLoc(function(position) {
-    $scope.position = position;
-    console.log($scope.position);
-  });
-  // var initializeUSNews = function(src) {
-  //   News.getDefaultNews(src)
-  //     .then(function(data) {
-  //       $scope.usNews = data.data.articles.slice(0,5);
-  //       console.log($scope.usNews);
-  //     })
-  //     .catch(function(error) {
-  //       console.log(error);
-  //     });
-  // }
+  $scope.localnews = {};
+  $scope.searchnews = {};
 
-  // initializeUSNews('cnbc');
+  $scope.lat;
+  $scope.long;
+
+  var initializeLocalNews = function(lat, long) {
+    News.getNeighborhood(lat, long)
+      .then(function(data) {
+        return News.getBingNews(data.neighbourhood.split(' ').join('+') + '+' + data.city.split(' ').join('+'));
+      })
+      .then(function(data) {
+        $scope.localnews = data.data.value;
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+  }
+
+  $scope.initializeSearch = function(query1) {
+      News.getBingNews(query1)
+      .then(function(data) {
+        $scope.searchnews = data.data.value;
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+  };
+
+  geolocate.getLoc(function(position) {
+    $scope.lat = position.coords.latitude;
+    $scope.long = position.coords.longitude;
+    initializeLocalNews($scope.lat, $scope.long);
+  });
 
 });
