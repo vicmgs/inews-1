@@ -1,0 +1,55 @@
+<!doctype html>
+    <head>
+        <meta charset="utf-8">
+        <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> -->
+        <title>iNews - Local News for You</title>
+        <!-- <meta name="description" content=""> -->
+        <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+      <link rel='stylesheet' type='text/css' href='css/main.css'>
+        <!-- <link rel="apple-touch-icon" href="apple-touch-icon.png"> -->
+    </head>
+    <body ng-app='inews'>
+      <div id='Nav'></div>
+      
+      <div ng-controller='localNewsController' id='LocalNews'>
+          
+      </div>
+      
+      <div id='CustomNews'></div>
+      
+      <div ng-controller='defaultNewsController' id='USNews'>
+        <div ng-repeat='news in usNews'>
+          <img class='tile' ng-src='{{ news.urlToImage}}'>
+          <li>{{ news.description}}</li>
+          <li>{{ news.publishedAt}}</li>
+          <li>{{ news.author}}</li>
+          <!-- <li>{{ news.url}}</li> -->
+        </div>
+        <hr>
+        <div ng-repeat='news in worldNews'>
+          <img class='tile' ng-src='{{ news.urlToImage}}'>
+          <li>{{ news.description}}</li>
+          <li>{{ news.publishedAt}}</li>
+          <li>{{ news.author}}</li>
+          <!-- <li>{{ news.url}}</li> -->
+        </div>
+      </div>
+
+      <hr>
+
+      <footer>
+        <p>&copy; iNews 2016</p>
+      </footer>
+
+      <script src="lib/angular/angular.js"></script>
+      <script src="lib/angular-animate/angular-animate.js"></script>
+      <script src="lib/angular-aria/angular-aria.js"></script>
+      <script src="lib/angular-material/angular-material.js"></script>
+      <script src="lib/angular-route/angular-route.js"></script>
+      
+      <script src="app/services/services.js"></script>
+      <script src="app/defaultNews/defaultNews.js"></script>
+      <script src="app/localNews/localNews.js"></script>
+      <script src="app/app.js"></script>
+    </body>
+</html>
