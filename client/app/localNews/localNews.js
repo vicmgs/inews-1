@@ -1,6 +1,6 @@
 angular.module('inews.localNews', [])
 
-.controller('localNewsController', function($scope, News, $location, geolocate) {
+.controller('localNewsController', function($scope, News, $location, $window) {
   $scope.localnews = {};
   $scope.searchnews = {};
 
@@ -30,10 +30,12 @@ angular.module('inews.localNews', [])
       });
   };
 
-  geolocate.getLoc(function(position) {
-    $scope.lat = position.coords.latitude;
-    $scope.long = position.coords.longitude;
-    initializeLocalNews($scope.lat, $scope.long);
-  });
+  if ($window.navigator.geolocation) {
+    $window.navigator.geolocation.getCurrentPosition(function(position){
+      $scope.lat = position.coords.latitude;
+      $scope.long = position.coords.longitude;
+      initializeLocalNews($scope.lat, $scope.long);
+    });
+  }
 
 });
