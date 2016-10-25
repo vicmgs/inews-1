@@ -13,7 +13,7 @@
 
       <div ng-controller='localNewsController' id='LocalNews'>
         <h2>Local News</h2>
-        <div ng-repeat='news in localnews | limitTo:3'>
+        <div ng-repeat='news in localnews | limitTo:lim1'>
           <a ng-href="{{ news.url}}">
             <img class='tile' ng-src='{{ news.image.thumbnail.contentUrl}}'>
             <p>{{ news.name}}</p>
@@ -21,13 +21,14 @@
           <p>{{ news.description}}</p>
           <p>{{ news.datePublished}}</p>
         </div>
+        <button ng-click='loadMore1()'>Load More</button>
         <hr>
         <h2>News Search</h2>
         <form>
           <input ng-model='search' type="text" name="search">
           <input ng-click='initializeSearch(search)' type="submit" value="Search">
         </form>
-        <div ng-repeat='news in searchnews | limitTo:3'>
+        <div ng-repeat='news in searchnews | limitTo:lim2'>
           <a ng-href="{{ news.url}}">
             <img class='tile' ng-src='{{ news.image.thumbnail.contentUrl}}'>
             <p>{{ news.name}}</p>
@@ -35,6 +36,7 @@
           <p>{{ news.description}}</p>
           <p>{{ news.datePublished}}</p>
         </div>
+        <button ng-click='loadMore2()'>Load More</button>
         <hr>
       </div>
 
@@ -44,7 +46,7 @@
           <input ng-model='city1' type="text" name="city1">
           <input ng-click='initializeCustom1(city1)' type="submit" value="Save">
         </form>
-        <div ng-repeat='news in custom1news | limitTo:3'>
+        <div ng-repeat='news in custom1news | limitTo:lim1'>
           <a ng-href="{{ news.url}}">
             <img class='tile' ng-src='{{ news.image.thumbnail.contentUrl}}'>
             <p>{{ news.name}}</p>
@@ -52,6 +54,7 @@
           <p>{{ news.description}}</p>
           <p>{{ news.datePublished}}</p>
         </div>
+        <button ng-click='loadMore1()'>Load More</button>
         <hr>
 
         <h2>{{city2 || 'Custom 2'}} News</h2>
@@ -59,7 +62,7 @@
           <input ng-model='city2' type="text" name="city2">
           <input ng-click='initializeCustom2(city2)' type="submit" value="Save">
         </form>
-        <div ng-repeat='news in custom2news | limitTo:3'>
+        <div ng-repeat='news in custom2news | limitTo:lim2'>
           <a ng-href="{{ news.url}}">
             <img class='tile' ng-src='{{ news.image.thumbnail.contentUrl}}'>
             <p>{{ news.name}}</p>
@@ -67,12 +70,13 @@
           <p>{{ news.description}}</p>
           <p>{{ news.datePublished}}</p>
         </div>
+        <button ng-click='loadMore2()'>Load More</button>
         <hr>
       </div>
 
       <div ng-controller='defaultNewsController' id='USNews'>
         <h2>U.S. News</h2>
-        <div ng-repeat='news in usNews | limitTo:3'>
+        <div ng-repeat='news in usNews | limitTo:lim1'>
           <a ng-href="{{ news.url}}">
             <img class='tile' ng-src='{{ news.urlToImage}}'>
             <p>{{ news.title}}</p>
@@ -80,9 +84,10 @@
           <p>{{ news.description}}</p>
           <p>{{ news.publishedAt}}</p>
         </div>
+        <button ng-click='loadMore1()'>Load More</button>
         <hr>
         <h2>World News</h2>
-        <div ng-repeat='news in worldNews | limitTo:3'>
+        <div ng-repeat='news in worldNews | limitTo:lim2'>
           <a ng-href="{{ news.url}}">
             <img class='tile' ng-src='{{ news.urlToImage}}'>
             <p>{{ news.title}}</p>
@@ -90,6 +95,7 @@
           <p>{{ news.description}}</p>
           <p>{{ news.publishedAt}}</p>
         </div>
+        <button ng-click='loadMore2()'>Load More</button>
         <hr>
       </div>
 

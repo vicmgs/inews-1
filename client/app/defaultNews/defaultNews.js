@@ -4,6 +4,17 @@ angular.module('inews.defaultNews', [])
   $scope.usNews = {};
   $scope.worldNews = {};
 
+  $scope.lim1 = 3;
+  $scope.lim2 = 3;
+
+  $scope.loadMore1 = function() {
+    $scope.lim1 = 10;
+  }
+
+  $scope.loadMore2 = function() {
+    $scope.lim2 = 10;
+  }
+
   var initializeUSNews = function(src) {
     News.getDefaultNews(src)
       .then(function(data) {
