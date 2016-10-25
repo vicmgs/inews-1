@@ -35,7 +35,7 @@ angular.module('inews.services', [])
   var getNeighborhood = function(lat, long) {
     return $http({
       method: 'GET',
-      url: 'http://nominatim.openstreetmap.org/reverse?format=json&lat=' + lat + '&lon=' + long
+      url: 'https://nominatim.openstreetmap.org/reverse?format=json&lat=' + lat + '&lon=' + long
     })
     .then(function(data) {
       return data.data.address;

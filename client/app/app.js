@@ -4,7 +4,7 @@ angular.module('inews', [
   'inews.defaultNews',
   'inews.localNews',
   'inews.customNews',
-  'ngMaterial'
+  'inews.navigation'
 ])
 .config(function($httpProvider) {
   $httpProvider.interceptors.push('AttachToken');
