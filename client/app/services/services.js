@@ -21,9 +21,26 @@ angular.module('inews.services', [])
   //   });
   // };
 
-  // var getLocalNews = function(locationInfo) {
+  var getBingNews = function(query) {
+    return $http({
+      method: 'GET',
+      url: 'https://api.cognitive.microsoft.com/bing/v5.0/news/search?q=' + query + '&count=10&offset=0&mkt=en-us&safeSearch=Moderate',
+      headers: {"Ocp-Apim-Subscription-Key": "e3bbf6615de14f4e8e2610f061c16ac5"}
+    })
+    .then(function(data) {
+      return data;
+    });
+  };
 
-  // };
+  var getNeighborhood = function(lat, long) {
+    return $http({
+      method: 'GET',
+      url: 'http://nominatim.openstreetmap.org/reverse?format=json&lat=' + lat + '&lon=' + long
+    })
+    .then(function(data) {
+      return data.data.address;
+    });
+  };
 
   var getDefaultNews = function(src) {
     return $http({
@@ -33,23 +50,12 @@ angular.module('inews.services', [])
     .then(function(data) {
       return data;
     });
-  }
-  return {
-    getDefaultNews: getDefaultNews
-  }
-
-})
-.factory('geolocate', function($window) {
-  var getLoc = function() {
-    if ($window.navigator.geolocation) {
-      
-      $window.navigator.geolocation.getCurrentPosition(function(position){
-        console.log('here');
-        return position;
-      });
-    }
   };
 
-  return {getLoc: getLoc};
+  return {
+    getDefaultNews: getDefaultNews,
+    getNeighborhood: getNeighborhood,
+    getBingNews: getBingNews
+  };
 
 });

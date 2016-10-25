@@ -4,11 +4,23 @@ angular.module('inews.defaultNews', [])
   $scope.usNews = {};
   $scope.worldNews = {};
 
+  $scope.lim1 = 3;
+  $scope.lim2 = 3;
+
+  $scope.loadMore1 = function() {
+    if ($scope.lim1 === 3) $scope.lim1 = 10;
+    else $scope.lim1 = 3;
+  }
+
+  $scope.loadMore2 = function() {
+    if ($scope.lim2 === 3) $scope.lim2 = 10;
+    else $scope.lim2 = 3;
+  }
+
   var initializeUSNews = function(src) {
     News.getDefaultNews(src)
       .then(function(data) {
-        $scope.usNews = data.data.articles.slice(0,5);
-        console.log($scope.usNews);
+        $scope.usNews = data.data.articles.slice(0,10);
       })
       .catch(function(error) {
         console.log(error);
@@ -18,12 +30,12 @@ angular.module('inews.defaultNews', [])
   var initializeWorldNews = function(src) {
     News.getDefaultNews(src)
       .then(function(data) {
-        $scope.worldNews = data.data.articles.slice(0,5);
+        $scope.worldNews = data.data.articles.slice(0,10);
       })
       .catch(function(error) {
         console.log(error);
       });
   }
   initializeUSNews('cnbc');
-  initializeWorldNews('cnn');
+  initializeWorldNews('google-news');
 });

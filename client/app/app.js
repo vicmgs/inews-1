@@ -2,7 +2,9 @@ angular.module('inews', [
   'ngMaterial',
   'inews.services',
   'inews.defaultNews',
-  'inews.localNews'
+  'inews.localNews',
+  'inews.customNews',
+  'ngMaterial'
 ])
 .config(function($httpProvider) {
   $httpProvider.interceptors.push('AttachToken');
@@ -13,7 +15,7 @@ angular.module('inews', [
       var jwt = $window.localStorage.getItem('com.inews');
       if (jwt) {
         object.headers['x-access-token'] = jwt;
-      } 
+      }
       object.headers['Allow-Control-Allow-Origin'] = '*';
       return object
     }
