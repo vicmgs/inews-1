@@ -4,6 +4,16 @@ angular.module('inews.customNews', [])
   $scope.custom1news = {};
   $scope.custom2news = {};
 
+  $scope.lim1 = 3;
+  $scope.lim2 = 3;
+
+  $scope.loadMore1 = function() {
+    $scope.lim1 = 10;
+  }
+
+  $scope.loadMore2 = function() {
+    $scope.lim2 = 10;
+  }
 
   $scope.initializeCustom1 = function(query1) {
       News.getBingNews(query1)

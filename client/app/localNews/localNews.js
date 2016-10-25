@@ -3,9 +3,19 @@ angular.module('inews.localNews', [])
 .controller('localNewsController', function($scope, News, $location, $window) {
   $scope.localnews = {};
   $scope.searchnews = {};
+  $scope.lim1 = 3;
+  $scope.lim2 = 3;
 
   $scope.lat;
   $scope.long;
+
+  $scope.loadMore1 = function() {
+    $scope.lim1 = 10;
+  }
+
+  $scope.loadMore2 = function() {
+    $scope.lim2 = 10;
+  }
 
   var initializeLocalNews = function(lat, long) {
     News.getNeighborhood(lat, long)
