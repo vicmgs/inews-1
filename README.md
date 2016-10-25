@@ -1,6 +1,6 @@
 # inews - your local news aggregator
 
-https://travis-ci.org/maoist-macaroon/inews.svg?branch=master
+![Build Status](https://travis-ci.org/maoist-macaroon/inews.svg?branch=master)
 
 > News aggregator by location - Subscribe and get your local news on your fingertip!
 
