@@ -22,7 +22,9 @@ angular.module('inews.localNews', [])
   var initializeLocalNews = function(lat, long) {
     News.getNeighborhood(lat, long)
       .then(function(data) {
-        return News.getBingNews(data.neighbourhood.split(' ').join('+') + '+' + data.city.split(' ').join('+'));
+        console.log(data);
+        console.log(data.neighbourhood + '+' + data.city)
+        return News.getBingNews(data.neighbourhood + '+' + data.city);
       })
       .then(function(data) {
         $scope.localnews = data.data.value;
