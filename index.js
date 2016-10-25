@@ -1,5 +1,5 @@
 var express = require('express');
-var newsRouter = require('./server/routers/getNews.js');
+var newsRouter = require('./server/routers/getnews.js');
 
 var server = express();
 
@@ -13,7 +13,6 @@ server.listen(server.get('port'), function () {
 
 server.use('/api/getNews', newsRouter);
 
-  
+
 module.exports = server;
 //
-
