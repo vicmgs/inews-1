@@ -58,16 +58,4 @@ angular.module('inews.services', [])
     getBingNews: getBingNews
   };
 
-})
-.factory('geolocate', function($window) {
-  var getLoc = function() {
-    if ($window.navigator.geolocation) {
-      $window.navigator.geolocation.getCurrentPosition(function(position){
-        return position;
-      });
-    }
-  };
-
-  return {getLoc: getLoc};
-
 });
