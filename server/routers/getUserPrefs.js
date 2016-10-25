@@ -1,28 +1,29 @@
 var express = require('express');
 var request = require('request');
 var bodyparser = require('body-parser');
+var mongoose = require('mongoose');
 var Promise = require('bluebird');
-var userPrefController = require('../../db/controllers/userPrefController.js')
 var request = Promise.promisify(require('request'));
-var mongoose = require('mongoose')
+//local files
 var API_KEY = require('../config.js').API_KEY;
+var userPrefController = require('../../db/controllers/userPrefController.js');
 
 var router = express.Router();
 
-
 router.route('/:username')
-//we fire Get request to bing every time
 .get(function(req, res) {
-  
+  //username from request parameters
   var username = req.params.username;
-    console.log('~~~~~~~~~~~~~~~~get request made for user', username)
-  
+  console.log('~~~~~~~~~~~~~~~~get request made for user', username);
+  //searh db for username prefs by username
   userPrefController.findOne(username, function(err, data) {
     if(err) {
-      console.error(err)
+      console.error(err);
     }
-    console.log('data  ', data)
-    res.send(data)
+    //
+    console.log('data  ', data);
+    //send prefs data back
+    res.send(data);
   })
 });
 

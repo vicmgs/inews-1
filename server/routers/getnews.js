@@ -4,9 +4,9 @@ var bodyparser = require('body-parser');
 var Promise = require('bluebird');
 
 var request = Promise.promisify(require('request'));
-
+//local files
 var API_KEY = require('../config.js').API_KEY;
-//no controller because no db
+//no controller needed because no db acces on getnews
 
 var router = express.Router();
 
@@ -25,7 +25,7 @@ var router = express.Router();
 };*/
 //
 router.route('/')
-//we fire Get request to bing every time
+//we fire a Get request to bing in response to a request for news to our site
 .get(function(req, res) {
   var bingquery = 'https://api.cognitive.microsoft.com/bing/v5.0/news/?location=SanFrancisco';
 
@@ -38,13 +38,14 @@ router.route('/')
           'Ocp-Apim-Subscription-Key': API_KEY
       }
   };
-
+  //get request to bing with our bing API key
   request(options)
   .then(function(content){
     var info = JSON.parse(content.body);
-    res.send(info.value);
+    //send news back to user client
+    res.send(info.value);//the news array is in this value property
   });
 
 });
-
+//export
 module.exports = router;
