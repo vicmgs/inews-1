@@ -1,9 +1,9 @@
 var expect = require('chai').expect
 var request = require('request');
-var server = require('../index.js');
+// var server = require('../index.js');
 
-console.log('server', server);
-var bingEndpoint = server.endpoint;
+// console.log('server', server);
+// var bingEndpoint = server.endpoint;
 var API_KEY = require('../server/config.js').API_KEY;
 
 // endpoints to build out:
