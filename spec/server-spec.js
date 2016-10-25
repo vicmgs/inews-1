@@ -1,6 +1,6 @@
 var expect = require('chai').expect
 var request = require('request');
-// var server = require('../index.js');
+var server = require('../index.js');
 
 // console.log('server', server);
 // var bingEndpoint = server.endpoint;
