@@ -3,9 +3,21 @@ angular.module('inews.localNews', [])
 .controller('localNewsController', function($scope, News, $location, $window) {
   $scope.localnews = {};
   $scope.searchnews = {};
+  $scope.lim1 = 3;
+  $scope.lim2 = 3;
 
   $scope.lat;
   $scope.long;
+
+  $scope.loadMore1 = function() {
+    if ($scope.lim1 === 3) $scope.lim1 = 10;
+    else $scope.lim1 = 3;
+  }
+
+  $scope.loadMore2 = function() {
+    if ($scope.lim2 === 3) $scope.lim2 = 10;
+    else $scope.lim2 = 3;
+  }
 
   var initializeLocalNews = function(lat, long) {
     News.getNeighborhood(lat, long)
@@ -37,5 +49,7 @@ angular.module('inews.localNews', [])
       initializeLocalNews($scope.lat, $scope.long);
     });
   }
+
+  $scope.initializeSearch('Top News');
 
 });
