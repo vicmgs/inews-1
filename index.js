@@ -13,7 +13,6 @@ server.listen(server.get('port'), function () {
 
 server.use('/api/getNews', newsRouter);
 
-  
+
 module.exports = server;
 //
-
