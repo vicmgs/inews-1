@@ -1,5 +1,5 @@
 var express = require('express');
-var newsRouter = require('./server/routers/getNews.js');
+var newsRouter = require('./server/routers/getnews.js');
 
 var server = express();
 
