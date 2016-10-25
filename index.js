@@ -17,6 +17,5 @@ server.listen(server.get('port'), function () {
 server.use('/api/getnews', newsRouter);
 
 server.use('/api/getUserPrefs', userPrefsRouter)
-  
-module.exports = server;
 
+module.exports = server;
