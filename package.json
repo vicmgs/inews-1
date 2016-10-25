@@ -4,7 +4,8 @@
   "description": "local new aggregator",
   "main": "main.js",
   "scripts": {
-    "test": "grunt test"
+    "start": "NODE_ENV=TEST nodemon index.js",
+    "test": "NODE_ENV=TEST grunt test"
   },
   "engines": {
     "node": "4.5.0",
