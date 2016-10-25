@@ -32,6 +32,7 @@
             <input ng-model='search' type="text" name="search">
             <input ng-click='initializeSearch(search)' type="submit" value="Search">
           </form>
+          <br>
           <div ng-repeat='news in searchnews | limitTo:lim2'>
             <a ng-href="{{ news.url}}">
               <img class='tile' ng-src='{{ news.image.thumbnail.contentUrl}}'>
@@ -52,6 +53,7 @@
             <input ng-model='city1' type="text" name="city1">
             <input ng-click='initializeCustom1(city1)' type="submit" value="Save">
           </form>
+          <br>
           <div ng-repeat='news in custom1news | limitTo:lim1'>
             <a ng-href="{{ news.url}}">
               <img class='tile' ng-src='{{ news.image.thumbnail.contentUrl}}'>
@@ -70,6 +72,7 @@
             <input ng-model='city2' type="text" name="city2">
             <input ng-click='initializeCustom2(city2)' type="submit" value="Save">
           </form>
+          <br>
           <div ng-repeat='news in custom2news | limitTo:lim2'>
             <a ng-href="{{ news.url}}">
               <img class='tile' ng-src='{{ news.image.thumbnail.contentUrl}}'>
