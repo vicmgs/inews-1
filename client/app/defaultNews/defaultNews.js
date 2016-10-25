@@ -8,11 +8,13 @@ angular.module('inews.defaultNews', [])
   $scope.lim2 = 3;
 
   $scope.loadMore1 = function() {
-    $scope.lim1 = 10;
+    if ($scope.lim1 === 3) $scope.lim1 = 10;
+    else $scope.lim1 = 3;
   }
 
   $scope.loadMore2 = function() {
-    $scope.lim2 = 10;
+    if ($scope.lim2 === 3) $scope.lim2 = 10;
+    else $scope.lim2 = 3;
   }
 
   var initializeUSNews = function(src) {
