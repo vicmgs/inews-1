@@ -9,9 +9,17 @@
       <link rel='stylesheet' type='text/css' href='css/main.css'>
         <!-- <link rel="apple-touch-icon" href="apple-touch-icon.png"> -->
     </head>
-    <body ng-app='inews'>
-      <div id='Nav'>
+    <body ng-app='inews' ng-controller="navController">
 
+      <div>
+        <md-button ng-click="signIn($event)" class="md-raised">
+          Sign In
+          </md-button>
+      </div>
+      <div>
+        <md-button ng-click="signUp($event)" class="md-raised">
+          Sign Up
+          </md-button>
       </div>
 
       <div layout='row' layout-xs="column" layout-margin ng-controller='localNewsController' id='LocalNews'>
@@ -26,8 +34,8 @@
             <p>{{ news.datePublished}}</p>
           </div>
           <button ng-click='loadMore1()'>{{lim1 === 3 ? 'Show More' : 'Show Less'}}</button>
-
         </div>
+
         <div flex>
           <h2>News Search</h2>
           <form>
@@ -44,7 +52,6 @@
             <p>{{ news.datePublished}}</p>
           </div>
           <button ng-click='loadMore2()'>{{lim2 === 3 ? 'Show More' : 'Show Less'}}</button>
-
         </div>
       </div>
 
@@ -114,6 +121,75 @@
         </div>
       </div>
 
+      <div style="visibility: hidden">
+        <div class="md-dialog-container" id="signInDialog">
+          <md-dialog>
+            <form name="loginForm" data-ng-submit="handleSignIn()">
+              <md-dialog-content>
+                  <div class="md-dialog-content">
+                      <md-input-container class="md-block">
+                          <label>Username:</label>
+                          <input ng-model="username" required>
+                      </md-input-container>
+
+                      <md-input-container class="md-block">
+                          <label>Password:</label>
+                          <input ng-model="password" type="password" required>
+                      </md-input-container>
+                  </div>
+              </md-dialog-content>
+              <md-dialog-actions layout="row">
+                  <span flex></span>
+                  <md-button type="submit" class="md-primary"
+                             ng-class="{'md-raised': (loginForm.$dirty && loginForm.$valid) }">
+                      OK
+                  </md-button>
+                  <md-button type="button" ng-click="signinCancel(); $event.stopPropagation();">
+                      Cancel
+                  </md-button>
+              </md-dialog-actions>
+            </form>
+          </md-dialog>
+        </div>
+      </div>
+
+      <div style="visibility: hidden">
+        <div class="md-dialog-container" id="signUpDialog">
+          <md-dialog>
+            <form name="signupForm" data-ng-submit="handleSignUp()">
+              <md-dialog-content>
+                  <div class="md-dialog-content">
+                      <md-input-container class="md-block">
+                          <label>Username:</label>
+                          <input ng-model="username" required>
+                      </md-input-container>
+
+                      <md-input-container class="md-block">
+                          <label>Password:</label>
+                          <input ng-model="password" type="password" required>
+                      </md-input-container>
+
+                      <md-input-container class="md-block">
+                          <label>Password Confirm:</label>
+                          <input ng-model="confirm" type="password" required>
+                      </md-input-container>
+                  </div>
+              </md-dialog-content>
+              <md-dialog-actions layout="row">
+                  <span flex></span>
+                  <md-button type="submit" class="md-primary"
+                             ng-class="{'md-raised': (signupForm.$dirty && signupForm.$valid) }">
+                      OK
+                  </md-button>
+                  <md-button type="button" ng-click="signupCancel(); $event.stopPropagation();">
+                      Cancel
+                  </md-button>
+              </md-dialog-actions>
+            </form>
+          </md-dialog>
+        </div>
+      </div>
+
       <footer>
         <p>&copy; iNews 2016</p>
       </footer>
@@ -128,6 +204,7 @@
       <script src="app/defaultNews/defaultNews.js"></script>
       <script src="app/localNews/localNews.js"></script>
       <script src="app/customNews/customNews.js"></script>
+      <script src="app/navigation/navigation.js"></script>
       <script src="app/app.js"></script>
     </body>
 </html>
