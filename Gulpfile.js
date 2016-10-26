@@ -39,7 +39,7 @@ gulp.task('karma', function (done) {
   }, done).start();
 });
 
-gulp.task('test', function() {
+gulp.task('test-server', function() {
   return gulp.src(paths.server_test, { read: false })
   .pipe(mocha({reporter: 'spec', color: true}))
   .once('end', () => {
@@ -47,4 +47,6 @@ gulp.task('test', function() {
     });
 });
 
+gulp.task('test-all', ['test-server', 'test-client']);
+gulp.task('test-client', ['karma']);
 gulp.task('default', ['start']);
