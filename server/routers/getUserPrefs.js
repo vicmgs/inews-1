@@ -1,6 +1,5 @@
 var express = require('express');
 var request = require('request');
-var bodyparser = require('body-parser');
 var mongoose = require('mongoose');
 var Promise = require('bluebird');
 var request = Promise.promisify(require('request'));
@@ -14,17 +13,25 @@ router.route('/:username')
 .get(function(req, res) {
   //username from request parameters
   var username = req.params.username;
-  console.log('~~~~~~~~~~~~~~~~get request made for user', username);
   //searh db for username prefs by username
   userPrefController.findOne(username, function(err, data) {
     if(err) {
       console.error(err);
     }
-    //
-    console.log('data  ', data);
-    //send prefs data back
-    res.send(data);
+    res.status(200).send(data);
   })
+});
+
+router.route('/')
+.post(function(req, res) {
+  userPrefController.insertOne({username: req.body.username, customnews1: 'test', customnews2: 'test2',
+  password: req.body.password}, function(err, data) {
+    if(err) {
+      console.error(err);
+    }
+
+  })
+  res.status(201).send();
 });
 
 module.exports = router;

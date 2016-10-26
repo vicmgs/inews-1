@@ -22,7 +22,7 @@ var router = express.Router();
     //response.send(info.value);
   }
 };*/
-//
+
 router.route('/')
 //we fire a Get request to bing in response to a request for news to our site
 .get(function(req, res) {
@@ -46,5 +46,5 @@ router.route('/')
   });
 
 });
-//export
+// export
 module.exports = router;

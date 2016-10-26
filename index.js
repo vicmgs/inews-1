@@ -2,14 +2,17 @@ var express = require('express');
 var newsRouter = require('./server/routers/getnews.js');
 var userPrefsRouter = require('./server/routers/getUserPrefs.js')
 var mongoose = require('mongoose');
+var bodyParser = require('body-parser');
 var config = require('./server/config.js');
 var server = express();
 //local files
 var newsRouter = require('./server/routers/getnews.js');
 var userPrefsRouter = require('./server/routers/getUserPrefs.js')
 //static file service
+server.use(bodyParser.json()); // for parsing application/json
+server.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlenco
 server.use(express.static(__dirname + '/client'));
-//port 
+//port
 server.set('port', (process.env.PORT || 5000) );
 
 var env = process.env.NODE_ENV;
