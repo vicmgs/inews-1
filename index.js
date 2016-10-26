@@ -1,4 +1,6 @@
 var express = require('express');
+var newsRouter = require('./server/routers/getnews.js');
+var userPrefsRouter = require('./server/routers/getUserPrefs.js')
 var mongoose = require('mongoose');
 var config = require('./server/config.js');
 var server = express();

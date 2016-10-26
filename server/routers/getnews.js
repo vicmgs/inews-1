@@ -6,7 +6,6 @@ var Promise = require('bluebird');
 var request = Promise.promisify(require('request'));
 //local files
 var API_KEY = require('../config.js').API_KEY;
-//no controller needed because no db acces on getnews
 
 var router = express.Router();
 

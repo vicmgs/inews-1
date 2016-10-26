@@ -1,5 +1,5 @@
 {
-  "name": "fnews",
+  "name": "inews",
   "version": "1.0.0",
   "description": "local new aggregator",
   "main": "main.js",
@@ -30,7 +30,9 @@
     "mocha": "^3.1.2",
     "mongoose": "^4.6.5",
     "request": "^2.75.0",
-    "request-promise": "^4.1.1"
+    "request-promise": "^4.1.1",
+    "superagent": "^2.3.0",
+    "supertest": "^2.0.1"
   },
   "repository": {
     "type": "git",

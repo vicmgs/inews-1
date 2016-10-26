@@ -13,6 +13,7 @@ module.exports = function(grunt) {
     //   files: ['<%= jshint.files %>'],
     //   tasks: ['jshint']
     // }
+    //
        mochaTest: {
         test: {
           options: {
