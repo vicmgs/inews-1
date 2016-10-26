@@ -5,20 +5,18 @@ var SALTDEPTH = 12;
 
 //schema instantiation
 var UserPrefsSchema = new mongoose.Schema({
-  id: {
-    type: Number,
+  username: {
+    type: String,
     required: true,
     unique: true
   },
-  userName: String,
   password: {
     type: String,
     required: true
   },
   salt: String,
-  city: String,
-  state: String,
-  zip: Number
+  customnews1: String,
+  customnews2: String
 });
 
 //comparePasswords method
