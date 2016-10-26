@@ -15,6 +15,12 @@ function findOne(username, callback) {
 function insertOne(userPref, callback) {
   userPrefsModel.create(userPref, callback);
 }
+
+function updateOne(username, field, value, callback) {
+  var obj = {};
+  obj[field] = value;
+  userPrefsModel.findOneAndUpdate({username: username}, obj, callback);
+}
 //todo
 function signin() {
 
@@ -30,3 +36,4 @@ function checkAuth() {
 
 exports.findOne = findOne;
 exports.insertOne = insertOne;
+exports.updateOne = updateOne;

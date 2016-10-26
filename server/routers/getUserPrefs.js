@@ -22,10 +22,21 @@ router.route('/:username')
   })
 });
 
+router.route('/:username')
+.put(function(req, res) {
+  //searh db for username prefs by username
+  userPrefController.updateOne(req.params.username, req.body.field, req.body.value, function(err, data) {
+    if(err) {
+      console.error(err);
+    } else {
+      res.status(201).send();
+    }
+  })
+});
+
 router.route('/')
 .post(function(req, res) {
-  userPrefController.insertOne({username: req.body.username, customnews1: 'test', customnews2: 'test2',
-  password: req.body.password}, function(err, data) {
+  userPrefController.insertOne({username: req.body.username, password: req.body.password}, function(err, data) {
     if(err) {
       console.error(err);
     }
