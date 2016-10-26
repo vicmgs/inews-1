@@ -5,9 +5,9 @@ var server = express();
 //local files
 var newsRouter = require('./server/routers/getnews.js');
 var userPrefsRouter = require('./server/routers/getUserPrefs.js')
-
+//static file service
 server.use(express.static(__dirname + '/client'));
-
+//port 
 server.set('port', (process.env.PORT || 5000) );
 
 var env = process.env.NODE_ENV;
@@ -21,6 +21,6 @@ server.listen(server.get('port'), function () {
 
 //routes middleware point to ./server/routers/...
 server.use('/api/getnews', newsRouter);
-server.use('/api/getUserPrefs', userPrefsRouter)
+server.use('/api/getUserPrefs', userPrefsRouter);
 
 module.exports = server;

@@ -6,7 +6,7 @@ var Promise = require('bluebird');
 var request = Promise.promisify(require('request'));
 //local files
 var API_KEY = require('../config.js').API_KEY;
-var userPrefController = require('../../db/controllers/userPrefController.js');
+var userPrefController = require('../../db/controllers/userPrefsCtrl.js');
 
 var router = express.Router();
 
