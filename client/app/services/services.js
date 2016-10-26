@@ -58,4 +58,7 @@ angular.module('inews.services', [])
     getBingNews: getBingNews
   };
 
+})
+.factory('AuthenticationService', function($http, $location, $windows) {
+
 });
