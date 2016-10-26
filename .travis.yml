@@ -1,3 +1,5 @@
+sudo: required
+dist: trusty
 services:
   - mongodb
 language: node_js
