@@ -22,29 +22,29 @@ var router = express.Router();
     //response.send(info.value);
   }
 };*/
-//
-// router.route('/')
-// //we fire a Get request to bing in response to a request for news to our site
-// .get(function(req, res) {
-//   var bingquery = 'https://api.cognitive.microsoft.com/bing/v5.0/news/?location=SanFrancisco';
-//
-//   //request options obj
-//   var options = {
-//     method: 'GET',
-//     url: bingquery,
-//     headers: {
-//           // Request headers
-//           'Ocp-Apim-Subscription-Key': API_KEY
-//       }
-//   };
-//   //get request to bing with our bing API key
-//   request(options)
-//   .then(function(content){
-//     var info = JSON.parse(content.body);
-//     //send news back to user client
-//     res.send(info.value);//the news array is in this value property
-//   });
-//
-// });
-//export
+
+router.route('/')
+//we fire a Get request to bing in response to a request for news to our site
+.get(function(req, res) {
+  var bingquery = 'https://api.cognitive.microsoft.com/bing/v5.0/news/?location=SanFrancisco';
+
+  //request options obj
+  var options = {
+    method: 'GET',
+    url: bingquery,
+    headers: {
+          // Request headers
+          'Ocp-Apim-Subscription-Key': API_KEY
+      }
+  };
+  //get request to bing with our bing API key
+  request(options)
+  .then(function(content){
+    var info = JSON.parse(content.body);
+    //send news back to user client
+    res.send(info.value);//the news array is in this value property
+  });
+
+});
+// export
 module.exports = router;
