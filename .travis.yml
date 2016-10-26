@@ -3,6 +3,4 @@ services:
 language: node_js
 node_js:
   - 4.5.0
-before_script:
-  - npm install grunt-cli -g
 script: npm test
