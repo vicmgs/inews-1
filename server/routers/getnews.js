@@ -2,7 +2,7 @@ var express = require('express');
 var request = require('request');
 var bodyparser = require('body-parser');
 var Promise = require('bluebird');
-
+//request promisifcation
 var request = Promise.promisify(require('request'));
 //local files
 var API_KEY = require('../config.js').API_KEY;

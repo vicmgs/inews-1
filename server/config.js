@@ -1,4 +1,4 @@
-//bing API key
+//bing API key, mongo URIs
 var config = {
   API_KEY : 'a54facec813042d9aad23b1fef21141b',
   MONGODB_LOCAL_URI: 'mongodb://localhost/maoistMacaroons',

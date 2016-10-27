@@ -1,10 +1,10 @@
 var expect = require('chai').expect
 var request = require('request');
+var request = require('supertest');
 var server = require('../index.js');
+var superagent = require('superagent');
 var bingEndpoint = 'api.cognitive.microsoft.com/bing/v5.0/news/?location=SanFrancisco';
 var API_KEY = require('../server/config.js').API_KEY;
-var request = require('supertest');
-var superagent = require('superagent')
 
 // endpoints to build out:
 
