@@ -1,5 +1,7 @@
-angular.module('inews.services', [])
+'use strict';
 
+angular
+.module('inews.services', [])
 .factory('News', function($http) {
 
   // var getCurrentLocation = function(lat, long) {
@@ -25,7 +27,7 @@ angular.module('inews.services', [])
     return $http({
       method: 'GET',
       url: 'https://api.cognitive.microsoft.com/bing/v5.0/news/search?q=' + query + '&count=10&offset=0&mkt=en-us&safeSearch=Moderate',
-      headers: {"Ocp-Apim-Subscription-Key": "e3bbf6615de14f4e8e2610f061c16ac5"}
+      headers: {'Ocp-Apim-Subscription-Key': 'e3bbf6615de14f4e8e2610f061c16ac5'}
     })
     .then(function(data) {
       return data;
@@ -82,7 +84,8 @@ angular.module('inews.services', [])
       return resp;
     })
     .catch(function(err) {
-      // Handle if the user already exists
+      // Handle if the user already existsi
+      throw(err);
     });
   };
 
@@ -99,5 +102,5 @@ angular.module('inews.services', [])
     signup: signup,
     logout: logout,
     isAuth: isAuth
-  }
+  };
 });

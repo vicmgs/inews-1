@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('inews.defaultNews', [])
 
 .controller('defaultNewsController', function($scope, News, $location) {

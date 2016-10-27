@@ -4,6 +4,7 @@ var gulp = require('gulp');
 var clean = require('gulp-clean');
 var nodemon = require('gulp-nodemon');
 var mocha = require('gulp-mocha');
+var jshint = require('gulp-jshint');
 var KarmaServer = require('karma').Server;
 var browserSync = require('browser-sync').create();
 
@@ -13,9 +14,16 @@ var paths = {
     html: ['client/app/**/*.html', 'client/index.html'],
     styles: ['client/css/main.css']
   },
-  server_test: ['specs/server-spec.js'],
+  serverTest: ['specs/server-spec.js'],
   server: 'index.js'
 };
+
+gulp.task('lint', function() {
+  return gulp.src(paths.src.scripts)
+  .pipe(jshint())
+  .pipe(jshint.reporter('jshint-stylish'));
+  // .pipe(jshint.reporter('fail'));
+});
 
 gulp.task('serve', function () {
   nodemon({
@@ -39,8 +47,9 @@ gulp.task('karma', function (done) {
   }, done).start();
 });
 
+// backend testing is handled by gulp task with mocha
 gulp.task('test-server', function() {
-  return gulp.src(paths.server_test, { read: false })
+  return gulp.src(paths.serverTest, { read: false })
   .pipe(mocha({reporter: 'spec', color: true}))
   .once('end', () => {
       process.exit();
@@ -48,5 +57,5 @@ gulp.task('test-server', function() {
 });
 
 gulp.task('test-all', ['test-server', 'test-client']);
-gulp.task('test-client', ['karma']);
+gulp.task('test-client', ['lint', 'karma']); // front-end testing is handled by karma test runner
 gulp.task('default', ['start']);

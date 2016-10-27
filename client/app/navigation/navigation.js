@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('inews.navigation', [])
 
 .controller('navController', function($scope, $mdDialog) {

@@ -1,4 +1,7 @@
-angular.module('inews.authentication', [])
+'use strict';
+
+angular
+.module('inews.authentication', [])
 .controller('AuthenticationController', function($scope, $window, AuthenticationService) {
   $scope.user = {};
 
@@ -21,9 +24,9 @@ angular.module('inews.authentication', [])
   $scope.logout = function() {
     AuthenticationService.logout();
     // set the UI states after logout
-  }
+  };
 
   $scope.isAuth = function() {
     return AuthenticationService.isAuth();
-  }
+  };
 });

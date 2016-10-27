@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('inews', [
   'ngMaterial',
   'inews.services',
@@ -18,9 +20,9 @@ angular.module('inews', [
         object.headers['x-access-token'] = jwt;
       }
       object.headers['Allow-Control-Allow-Origin'] = '*';
-      return object
+      return object;
     }
-  }
+  };
 
   return attach;
 });
