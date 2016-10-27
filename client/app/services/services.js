@@ -59,6 +59,45 @@ angular.module('inews.services', [])
   };
 
 })
-.factory('AuthenticationService', function($http, $location, $windows) {
+.factory('AuthenticationService', function($http, $window) {
 
+  var login = function(user) {
+      return $http({
+        method: 'POST',
+        url: '/api/user/login',
+        data: user
+      })
+      .then(function(resp) {
+        return resp;
+      });
+  };
+
+  var signup = function(user) {
+    return $http({
+      method: 'POST',
+      url: '/api/user/signup',
+      data: user
+    })
+    .then(function(resp) {
+      return resp;
+    })
+    .catch(function(err) {
+      // Handle if the user already exists
+    });
+  };
+
+  var isAuth = function () {
+    return !!$window.localStorage.getItem('com.inews');
+  };
+
+  var logout = function () {
+    $window.localStorage.removeItem('com.inews');
+  };
+
+  return {
+    login: login,
+    signup: signup,
+    logout: logout,
+    isAuth: isAuth
+  }
 });
