@@ -1,20 +1,14 @@
 var express = require('express');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
-//config and routing
-var config = require('./server/config.js');
+
+//local files
 var newsRouter = require('./server/routers/getnews.js');
 var userPrefsRouter = require('./server/routers/getUserPrefs.js')
-//server instance
+var config = require('./server/config.js');
+
 var server = express();
-//middleware
-server.use(bodyParser.json()); // for parsing application/json
-server.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlenco
-//routes middleware point to ./server/routers/...
-server.use('/api/getnews', newsRouter);
-server.use('/api/getUserPrefs', userPrefsRouter);
-//static file service
-server.use(express.static(__dirname + '/client'));
+
 //connections
 server.set('port', (process.env.PORT || 5000) );
 var env = process.env.NODE_ENV;
@@ -25,4 +19,15 @@ server.listen(server.get('port'), function () {
   console.log('listening');
 });
 
+//middleware
+server.use(bodyParser.json()); // for parsing application/json
+server.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlenco
+server.use(express.static(__dirname + '/client'));
+//routes middleware point to ./server/routers/...
+server.use('/api/getnews', newsRouter);
+server.use('/api/user/signup', userPrefsRouter);
+server.use('/api/user/login', userPrefsRouter);
+server.use('/api/getUserPrefs', userPrefsRouter);
+
 module.exports = server;
+

@@ -50,7 +50,8 @@ describe('server-side getNews GET request spec', function () {
       it('GET request should respond 200 for /getUserPrefs', function (done) {
         request(server)
         .get('/api/getUserPrefs/:username')
-        .expect(200, done)
+        .expect(200)
+        done()
       });
 
       it('GET request should respond with a res.body that is an object', function(done){
