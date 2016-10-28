@@ -11,6 +11,7 @@ var browserSync = require('browser-sync').create();
 var paths = {
   src: {
     scripts: ['client/app/**/*.js'],
+    serverScripts: ['server/**/*.js', './index.js'],
     html: ['client/app/**/*.html', 'client/index.html'],
     styles: ['client/css/main.css']
   },
@@ -18,12 +19,21 @@ var paths = {
   server: 'index.js'
 };
 
-gulp.task('lint', function() {
+gulp.task('frontEndlint', function() {
   return gulp.src(paths.src.scripts)
   .pipe(jshint())
   .pipe(jshint.reporter('jshint-stylish'));
   // .pipe(jshint.reporter('fail'));
 });
+
+gulp.task('backendLint', function() {
+  return gulp.src(paths.src.serverScripts)
+  .pipe(jshint())
+  .pipe(jshint.reporter('jshint-stylish'));
+  // .pipe(jshint.reporter('fail'));
+});
+
+gulp.task('lint', ['frontEndlint', 'backendLint']);
 
 gulp.task('serve', function () {
   nodemon({
