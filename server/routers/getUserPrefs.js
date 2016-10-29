@@ -37,11 +37,16 @@ router.route('/:username')
   })
 });
 
-//Creating a new user, sign up
+//Creating a new user, sign up, test url would be api/user/login
 router.route('/')
+//redirect
 .post(function(req, res) {
   //must have password confirm and confirm must match password
-  if (req.body.confirm && req.body.password === req.body.confirm) {
+  console.log('request ----------', req.body);
+  // console.log('res ----------', res);
+
+  if (req.body.username && req.body.password) {
+    console.log('inside the if statement')
     userPrefController.insertOne({username: req.body.username, password: req.body.password}, function(err, data) {
       if(err) {
         console.error(err);
@@ -55,25 +60,25 @@ router.route('/')
 });
 
 //no controller because no db
-
+//Creating a new user, sign up, test url would be api/user/signup
 router.route('/signup')
 //we fire Get request to bing every time
-.get(function(req, res) {
-  var user;
-  user[username] = req.params.username;
-  user[password] = req.params.password;
-  userPrefController.signup(user, function(err, data) {
-    if(err) {
-      console.error(err)
-    }
-    console.log('data', data)
-    res.send(data)
+.post(function(req, res) {
+  console.log('signup request', req.body);
+  var user = {};
+  user.username = req.body.username;
+  user.password = req.body.password;
+  userPrefController.signup(user)
+  .then(function(data) {
+    res.send(data);
   })
 });
 
-router.route('/login')
-//we fire Get request to bing every time
-.get(function(req, res) {
+
+router.route('/signin')
+//Creating a new user, sign up, test url would be api/user/signin
+.post(function(req, res) {
+  console.log('signin route');
   var user;
   user[username] = req.params.username;
   user[password] = req.params.password;  
@@ -81,26 +86,10 @@ router.route('/login')
     if(err) {
       console.error(err)
     }
-    console.log('data', data)
-    res.send(data)
+    console.log('data', data);
+    res.send(data);
+    //?send token?
   });
 });
-
-
-router.route('/:username')
-//we fire Get request to bing every time
-.get(function(req, res) {
-  
-  var username = req.params.username;
-  
-  userPrefController.findOne(username, function(err, data) {
-    if(err) {
-      console.error(err)
-    }
-    console.log('data  ', data)
-    res.send(data)
-  })
-});
-
 
 module.exports = router;
