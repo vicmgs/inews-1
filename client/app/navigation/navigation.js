@@ -55,7 +55,6 @@ angular.module('inews.navigation', [])
 
   $scope.logout = function() {
     AuthenticationService.logout();
-    // set the UI states after logout
   };
 
   $scope.isAuth = function() {
