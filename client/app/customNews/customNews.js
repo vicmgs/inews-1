@@ -38,8 +38,4 @@ angular.module('inews.customNews', [])
         console.log(error);
       });
   };
-
-
-  $scope.initializeCustom1('Business');
-  $scope.initializeCustom2('Sports');
 });
