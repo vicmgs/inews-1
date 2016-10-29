@@ -32,7 +32,7 @@ router.route('/:username')
     if(err) {
       console.error(err);
     } else {
-      res.status(201).send();
+      res.status(201).send(data);
     }
   })
 });

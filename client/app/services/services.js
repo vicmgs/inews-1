@@ -102,4 +102,24 @@ angular
     logout: logout,
     isAuth: isAuth
   };
+})
+.factory('CustomNewsService', function($http, $window) {
+
+  var edit = function(user) {
+    return $http({
+      method: 'PUT',
+      url: '/api/user/' + user.username,
+      data: user
+    })
+    .then(function(resp) {
+      return resp;
+    })
+    .catch(function(err) {
+      throw(err);
+    });
+  };
+
+  return {
+    edit: edit
+  };
 });
