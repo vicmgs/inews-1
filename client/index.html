@@ -66,7 +66,7 @@
           </form>
           <br>
           <p ng-hide='isAuth()'>Sign in to save your custom news here!</p>
-          <div ng-repeat='news in custom1news | limitTo:lim1'>
+          <div ng-show='isAuth()' ng-repeat='news in custom1news | limitTo:lim1'>
             <a ng-href="{{ news.url}}">
               <img class='tile' ng-src='{{ news.image.thumbnail.contentUrl}}'>
               <p>{{ news.name}}</p>
@@ -85,7 +85,7 @@
           </form>
           <br>
           <p ng-hide='isAuth()'>Here is another! Sign up for a free account now!</p>
-          <div ng-repeat='news in custom2news | limitTo:lim2'>
+          <div ng-show='isAuth()' ng-repeat='news in custom2news | limitTo:lim2'>
             <a ng-href="{{ news.url}}">
               <img class='tile' ng-src='{{ news.image.thumbnail.contentUrl}}'>
               <p>{{ news.name}}</p>

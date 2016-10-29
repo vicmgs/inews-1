@@ -51,10 +51,12 @@ angular.module('inews.navigation', [])
         parent: angular.element(document.body)
       });
     });
+    $scope.$broadcast('signedin', $scope.user.username);
   };
 
   $scope.logout = function() {
     AuthenticationService.logout();
+    $scope.$broadcast('signedout');
   };
 
   $scope.isAuth = function() {

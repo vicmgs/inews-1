@@ -2,7 +2,7 @@
 
 angular.module('inews.customNews', [])
 
-.controller('customNewsController', function($scope, News, $location, CustomNewsService, $window) {
+.controller('customNewsController', function($http, $scope, News, $location, CustomNewsService, $window) {
   $scope.custom1news = {};
   $scope.custom2news = {};
 
@@ -44,4 +44,41 @@ angular.module('inews.customNews', [])
       });
     })
   };
+
+  $scope.$on('signedin', function(event, arg) {
+    $http({
+      method: 'GET',
+      url: '/api/user/' + arg
+    })
+    .then(function(resp){
+      if (!!resp.data[0].customnews1) {
+        News.getBingNews(resp.data[0].customnews1)
+        .then(function(data) {
+          $scope.city1 = resp.data[0].customnews1;
+          $scope.custom1news = data.data.value;
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+      }
+
+      if(!!resp.data[0].customnews2) {
+        News.getBingNews(resp.data[0].customnews2)
+        .then(function(data) {
+          $scope.city2 = resp.data[0].customnews2;
+          $scope.custom2news = data.data.value;
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+      }
+    })
+  });
+
+  $scope.$on('signedout', function(event) {
+    $scope.city1 = '';
+    $scope.city2 = '';
+    $scope.custom2news = {};
+    $scope.custom1news = {};
+  });
 });
