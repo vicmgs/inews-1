@@ -12,12 +12,12 @@
     <body ng-app='inews' ng-controller="navController">
 
       <div>
-        <md-button ng-click="signIn($event)" class="md-raised">
+        <md-button ng-click="signinshow($event)" class="md-raised">
           Sign In
           </md-button>
       </div>
       <div>
-        <md-button ng-click="signUp($event)" class="md-raised">
+        <md-button ng-click="signupshow($event)" class="md-raised">
           Sign Up
           </md-button>
       </div>
@@ -124,17 +124,17 @@
       <div style="visibility: hidden">
         <div class="md-dialog-container" id="signInDialog">
           <md-dialog>
-            <form name="loginForm" data-ng-submit="handleSignIn()">
+            <form name="loginForm" data-ng-submit="login()">
               <md-dialog-content>
                   <div class="md-dialog-content">
                       <md-input-container class="md-block">
                           <label>Username:</label>
-                          <input ng-model="username" required>
+                          <input ng-model="user.username" required>
                       </md-input-container>
 
                       <md-input-container class="md-block">
                           <label>Password:</label>
-                          <input ng-model="password" type="password" required>
+                          <input ng-model="user.password" type="password" required>
                       </md-input-container>
                   </div>
               </md-dialog-content>
@@ -156,22 +156,22 @@
       <div style="visibility: hidden">
         <div class="md-dialog-container" id="signUpDialog">
           <md-dialog>
-            <form name="signupForm" data-ng-submit="handleSignUp()">
+            <form name="signupForm" data-ng-submit="signup()">
               <md-dialog-content>
                   <div class="md-dialog-content">
                       <md-input-container class="md-block">
                           <label>Username:</label>
-                          <input ng-model="username" required>
+                          <input ng-model="user.username" required>
                       </md-input-container>
 
                       <md-input-container class="md-block">
                           <label>Password:</label>
-                          <input ng-model="password" type="password" required>
+                          <input ng-model="user.password" type="password" required>
                       </md-input-container>
 
                       <md-input-container class="md-block">
                           <label>Password Confirm:</label>
-                          <input ng-model="confirm" type="password" required>
+                          <input ng-model="user.confirm" type="password" required>
                       </md-input-container>
                   </div>
               </md-dialog-content>

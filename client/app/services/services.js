@@ -84,7 +84,6 @@ angular
       return resp;
     })
     .catch(function(err) {
-      // Handle if the user already existsi
       throw(err);
     });
   };

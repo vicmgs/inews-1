@@ -46,7 +46,7 @@ router.route('/signup')
       if(err) {
         console.error(err);
       } else {
-        res.status(201).send();
+        res.status(201).send(data);
       }
     });
   } else {
@@ -55,19 +55,23 @@ router.route('/signup')
 });
 
 //Logging in
-// router.route('/')
-// .post(function(req, res) {
-//   var user;
-//   user[username] = req.params.username;
-//   user[password] = req.params.password;
-//   userPrefController.signin(user, function(err, data) {
-//     if(err) {
-//       console.error(err)
-//     }
-//     console.log('data', data)
-//     res.send(data)
-//   });
-// });
+router.route('/login')
+.post(function(req, res) {
+
+  var username = req.body.username;
+  var password = req.body.password
+  //searh db for username prefs by username
+  userPrefController.findOne(username, function(err, data) {
+    if(err) {
+      console.error(err);
+    } else {
+      data[0].comparePasswords(password)
+      .then(function(valid){
+        res.status(200).send(data[0]);
+      });
+    }
+  })
+});
 
 
 module.exports = router;
