@@ -44,7 +44,7 @@
             <input ng-click='initializeSearch(search)' type="submit" value="Search">
           </form>
           <br>
-          <p ng-hide='isAuth()'>Sign in to use the search feature! No credit card needed!</p>
+          <p ng-hide='isAuth()'>Sign in to use the search feature!</p>
           <div ng-repeat='news in searchnews | limitTo:lim2'>
             <a ng-href="{{ news.url}}">
               <img class='tile' ng-src='{{ news.image.thumbnail.contentUrl}}'>
