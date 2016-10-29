@@ -38,7 +38,7 @@ router.route('/:username')
 });
 
 //Creating a new user, sign up
-router.route('/')
+router.route('/signup')
 .post(function(req, res) {
   //must have password confirm and confirm must match password
   if (req.body.confirm && req.body.password === req.body.confirm) {
@@ -54,53 +54,20 @@ router.route('/')
   }
 });
 
-//no controller because no db
-
-router.route('/signup')
-//we fire Get request to bing every time
-.get(function(req, res) {
-  var user;
-  user[username] = req.params.username;
-  user[password] = req.params.password;
-  userPrefController.signup(user, function(err, data) {
-    if(err) {
-      console.error(err)
-    }
-    console.log('data', data)
-    res.send(data)
-  })
-});
-
-router.route('/login')
-//we fire Get request to bing every time
-.get(function(req, res) {
-  var user;
-  user[username] = req.params.username;
-  user[password] = req.params.password;  
-  userPrefController.signin(user, function(err, data) {
-    if(err) {
-      console.error(err)
-    }
-    console.log('data', data)
-    res.send(data)
-  });
-});
-
-
-router.route('/:username')
-//we fire Get request to bing every time
-.get(function(req, res) {
-  
-  var username = req.params.username;
-  
-  userPrefController.findOne(username, function(err, data) {
-    if(err) {
-      console.error(err)
-    }
-    console.log('data  ', data)
-    res.send(data)
-  })
-});
+//Logging in
+// router.route('/')
+// .post(function(req, res) {
+//   var user;
+//   user[username] = req.params.username;
+//   user[password] = req.params.password;
+//   userPrefController.signin(user, function(err, data) {
+//     if(err) {
+//       console.error(err)
+//     }
+//     console.log('data', data)
+//     res.send(data)
+//   });
+// });
 
 
 module.exports = router;
