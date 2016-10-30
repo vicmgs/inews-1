@@ -32,14 +32,13 @@ router.route('/:username')
     if(err) {
       console.error(err);
     } else {
-      res.status(201).send();
+      res.status(201).send(data);
     }
   })
 });
 
-//Creating a new user, sign up, test url would be api/user/login
-router.route('/')
-//redirect
+//Creating a new user, sign up
+router.route('/signup')
 .post(function(req, res) {
   //must have password confirm and confirm must match password
   console.log('request ----------', req.body);
@@ -51,7 +50,7 @@ router.route('/')
       if(err) {
         console.error(err);
       } else {
-        res.status(201).send();
+        res.status(201).send(data);
       }
     });
   } else {
@@ -59,37 +58,23 @@ router.route('/')
   }
 });
 
-//no controller because no db
-//Creating a new user, sign up, test url would be api/user/signup
-router.route('/signup')
-//we fire Get request to bing every time
+//Logging in
+router.route('/login')
 .post(function(req, res) {
-  console.log('signup request', req.body);
-  var user = {};
-  user.username = req.body.username;
-  user.password = req.body.password;
-  userPrefController.signup(user)
-  .then(function(data) {
-    res.send(data);
-  })
-});
 
-
-router.route('/signin')
-//Creating a new user, sign up, test url would be api/user/signin
-.post(function(req, res) {
-  console.log('signin route');
-  var user;
-  user[username] = req.params.username;
-  user[password] = req.params.password;  
-  userPrefController.signin(user, function(err, data) {
+  var username = req.body.username;
+  var password = req.body.password
+  //searh db for username prefs by username
+  userPrefController.findOne(username, function(err, data) {
     if(err) {
-      console.error(err)
+      console.error(err);
+    } else {
+      data[0].comparePasswords(password)
+      .then(function(valid){
+        res.status(200).send(data[0]);
+      });
     }
-    console.log('data', data);
-    res.send(data);
-    //?send token?
-  });
+  })
 });
 
 module.exports = router;
