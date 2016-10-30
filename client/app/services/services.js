@@ -26,7 +26,7 @@ angular
   var getBingNews = function(query) {
     return $http({
       method: 'GET',
-      url: 'https://api.cognitive.microsoft.com/bing/v5.0/news/search?q=' + query + '&count=10&offset=0&mkt=en-us&safeSearch=Moderate',
+      url: '/api/getNews?search=' + query,
       headers: {'Ocp-Apim-Subscription-Key': 'e3bbf6615de14f4e8e2610f061c16ac5'}
     })
     .then(function(data) {
