@@ -41,11 +41,8 @@ router.route('/:username')
 router.route('/signup')
 .post(function(req, res) {
   //must have password confirm and confirm must match password
-  console.log('request ----------', req.body);
-  // console.log('res ----------', res);
 
   if (req.body.username && req.body.password) {
-    console.log('inside the if statement')
     userPrefController.insertOne({username: req.body.username, password: req.body.password}, function(err, data) {
       if(err) {
         console.error(err);
