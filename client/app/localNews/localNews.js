@@ -52,4 +52,6 @@ angular.module('inews.localNews', [])
     });
   }
 
+  $scope.initializeSearch('Top News');
+
 });

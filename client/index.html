@@ -9,6 +9,7 @@
       <link rel='stylesheet' type='text/css' href='css/main.css'>
         <!-- <link rel="apple-touch-icon" href="apple-touch-icon.png"> -->
     </head>
+<<<<<<< HEAD
     <body ng-app='inews' ng-controller="navController">
 
       <div>
@@ -40,11 +41,38 @@
         <div flex>
           <h2>News Search</h2>
           <form ng-show='isAuth()'>
+=======
+    <body ng-app='inews'>
+      <div id='Nav'>
+
+      </div>
+
+      <div layout='row' layout-xs="column" layout-margin ng-controller='localNewsController' id='LocalNews'>
+        <div flex>
+          <h2>Local News</h2>
+          <div ng-repeat='news in localnews | limitTo:lim1'>
+            <a ng-href="{{ news.url}}">
+              <img class='tile' ng-src='{{ news.image.thumbnail.contentUrl}}'>
+              <p>{{ news.name}}</p>
+            </a>
+            <p>{{ news.description}}</p>
+            <p>{{ news.datePublished}}</p>
+          </div>
+          <button ng-click='loadMore1()'>{{lim1 === 3 ? 'Show More' : 'Show Less'}}</button>
+
+        </div>
+        <div flex>
+          <h2>News Search</h2>
+          <form>
+>>>>>>> 40bff17496769bc1d9ee916d21aae7f7cbed417f
             <input ng-model='search' type="text" name="search">
             <input ng-click='initializeSearch(search)' type="submit" value="Search">
           </form>
           <br>
+<<<<<<< HEAD
           <p ng-hide='isAuth()'>Sign in to use the search feature!</p>
+=======
+>>>>>>> 40bff17496769bc1d9ee916d21aae7f7cbed417f
           <div ng-repeat='news in searchnews | limitTo:lim2'>
             <a ng-href="{{ news.url}}">
               <img class='tile' ng-src='{{ news.image.thumbnail.contentUrl}}'>
@@ -53,20 +81,33 @@
             <p>{{ news.description}}</p>
             <p>{{ news.datePublished}}</p>
           </div>
+<<<<<<< HEAD
           <button ng-show='isAuth()' ng-click='loadMore2()'>{{lim2 === 3 ? 'Show More' : 'Show Less'}}</button>
+=======
+          <button ng-click='loadMore2()'>{{lim2 === 3 ? 'Show More' : 'Show Less'}}</button>
+
+>>>>>>> 40bff17496769bc1d9ee916d21aae7f7cbed417f
         </div>
       </div>
 
       <div layout='row' layout-xs="column" layout-margin ng-controller='customNewsController' id='CustomNews'>
         <div flex>
           <h2>{{city1 || 'Custom 1'}} News</h2>
+<<<<<<< HEAD
           <form ng-show='isAuth()'>
+=======
+          <form>
+>>>>>>> 40bff17496769bc1d9ee916d21aae7f7cbed417f
             <input ng-model='city1' type="text" name="city1">
             <input ng-click='initializeCustom1(city1)' type="submit" value="Save">
           </form>
           <br>
+<<<<<<< HEAD
           <p ng-hide='isAuth()'>Sign in to save your custom news here!</p>
           <div ng-show='isAuth()' ng-repeat='news in custom1news | limitTo:lim1'>
+=======
+          <div ng-repeat='news in custom1news | limitTo:lim1'>
+>>>>>>> 40bff17496769bc1d9ee916d21aae7f7cbed417f
             <a ng-href="{{ news.url}}">
               <img class='tile' ng-src='{{ news.image.thumbnail.contentUrl}}'>
               <p>{{ news.name}}</p>
@@ -74,18 +115,31 @@
             <p>{{ news.description}}</p>
             <p>{{ news.datePublished}}</p>
           </div>
+<<<<<<< HEAD
           <button ng-show='isAuth()' ng-click='loadMore1()'>{{lim1 === 3 ? 'Show More' : 'Show Less'}}</button>
+=======
+          <button ng-click='loadMore1()'>{{lim1 === 3 ? 'Show More' : 'Show Less'}}</button>
+
+>>>>>>> 40bff17496769bc1d9ee916d21aae7f7cbed417f
         </div>
 
         <div flex>
           <h2>{{city2 || 'Custom 2'}} News</h2>
+<<<<<<< HEAD
           <form ng-show='isAuth()'>
+=======
+          <form>
+>>>>>>> 40bff17496769bc1d9ee916d21aae7f7cbed417f
             <input ng-model='city2' type="text" name="city2">
             <input ng-click='initializeCustom2(city2)' type="submit" value="Save">
           </form>
           <br>
+<<<<<<< HEAD
           <p ng-hide='isAuth()'>Here is another! Sign up for a free account now!</p>
           <div ng-show='isAuth()' ng-repeat='news in custom2news | limitTo:lim2'>
+=======
+          <div ng-repeat='news in custom2news | limitTo:lim2'>
+>>>>>>> 40bff17496769bc1d9ee916d21aae7f7cbed417f
             <a ng-href="{{ news.url}}">
               <img class='tile' ng-src='{{ news.image.thumbnail.contentUrl}}'>
               <p>{{ news.name}}</p>
@@ -93,7 +147,12 @@
             <p>{{ news.description}}</p>
             <p>{{ news.datePublished}}</p>
           </div>
+<<<<<<< HEAD
           <button ng-show='isAuth()' ng-click='loadMore2()'>{{lim2 === 3 ? 'Show More' : 'Show Less'}}</button>
+=======
+          <button ng-click='loadMore2()'>{{lim2 === 3 ? 'Show More' : 'Show Less'}}</button>
+
+>>>>>>> 40bff17496769bc1d9ee916d21aae7f7cbed417f
         </div>
       </div>
 
@@ -109,6 +168,10 @@
             <p>{{ news.publishedAt}}</p>
           </div>
           <button ng-click='loadMore1()'>{{lim1 === 3 ? 'Show More' : 'Show Less'}}</button>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 40bff17496769bc1d9ee916d21aae7f7cbed417f
         </div>
 
         <div flex>
@@ -122,6 +185,7 @@
             <p>{{ news.publishedAt}}</p>
           </div>
           <button ng-click='loadMore2()'>{{lim2 === 3 ? 'Show More' : 'Show Less'}}</button>
+<<<<<<< HEAD
         </div>
       </div>
 
@@ -191,6 +255,9 @@
               </md-dialog-actions>
             </form>
           </md-dialog>
+=======
+
+>>>>>>> 40bff17496769bc1d9ee916d21aae7f7cbed417f
         </div>
       </div>
 
