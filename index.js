@@ -25,9 +25,6 @@ server.use(bodyParser.urlencoded({ extended: true })); // for parsing applicatio
 server.use(express.static(__dirname + '/client'));
 //routes middleware point to ./server/routers/...
 server.use('/api/getnews', newsRouter);
-server.use('/api/user/signup', userPrefsRouter);
-server.use('/api/user/login', userPrefsRouter);
-server.use('/api/getUserPrefs', userPrefsRouter);
+server.use('/api/user', userPrefsRouter);
 
 module.exports = server;
-

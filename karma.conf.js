@@ -23,7 +23,7 @@ module.exports = function(config) {
       'client/app/**/*.js',
 
       'specs/client/authenticationServiceSpec.js',
-      'specs/client/authenticationControllerSpec.js'
+      'specs/client/navigationControllerSpec.js'
     ],
 
     // test results reporter to use

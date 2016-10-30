@@ -12,14 +12,15 @@
     <body ng-app='inews' ng-controller="navController">
 
       <div>
-        <md-button ng-click="signIn($event)" class="md-raised">
+        <md-button ng-hide='isAuth()' ng-click="signinshow($event)" class="md-raised">
           Sign In
-          </md-button>
-      </div>
-      <div>
-        <md-button ng-click="signUp($event)" class="md-raised">
+        </md-button>
+        <md-button ng-hide='isAuth()' ng-click="signupshow($event)" class="md-raised">
           Sign Up
-          </md-button>
+        </md-button>
+        <md-button ng-show='isAuth()' ng-click="logout()" class="md-raised">
+          Sign Out
+        </md-button>
       </div>
 
       <div layout='row' layout-xs="column" layout-margin ng-controller='localNewsController' id='LocalNews'>
@@ -38,11 +39,12 @@
 
         <div flex>
           <h2>News Search</h2>
-          <form>
+          <form ng-show='isAuth()'>
             <input ng-model='search' type="text" name="search">
             <input ng-click='initializeSearch(search)' type="submit" value="Search">
           </form>
           <br>
+          <p ng-hide='isAuth()'>Sign in to use the search feature!</p>
           <div ng-repeat='news in searchnews | limitTo:lim2'>
             <a ng-href="{{ news.url}}">
               <img class='tile' ng-src='{{ news.image.thumbnail.contentUrl}}'>
@@ -51,19 +53,20 @@
             <p>{{ news.description}}</p>
             <p>{{ news.datePublished}}</p>
           </div>
-          <button ng-click='loadMore2()'>{{lim2 === 3 ? 'Show More' : 'Show Less'}}</button>
+          <button ng-show='isAuth()' ng-click='loadMore2()'>{{lim2 === 3 ? 'Show More' : 'Show Less'}}</button>
         </div>
       </div>
 
       <div layout='row' layout-xs="column" layout-margin ng-controller='customNewsController' id='CustomNews'>
         <div flex>
           <h2>{{city1 || 'Custom 1'}} News</h2>
-          <form>
+          <form ng-show='isAuth()'>
             <input ng-model='city1' type="text" name="city1">
             <input ng-click='initializeCustom1(city1)' type="submit" value="Save">
           </form>
           <br>
-          <div ng-repeat='news in custom1news | limitTo:lim1'>
+          <p ng-hide='isAuth()'>Sign in to save your custom news here!</p>
+          <div ng-show='isAuth()' ng-repeat='news in custom1news | limitTo:lim1'>
             <a ng-href="{{ news.url}}">
               <img class='tile' ng-src='{{ news.image.thumbnail.contentUrl}}'>
               <p>{{ news.name}}</p>
@@ -71,17 +74,18 @@
             <p>{{ news.description}}</p>
             <p>{{ news.datePublished}}</p>
           </div>
-          <button ng-click='loadMore1()'>{{lim1 === 3 ? 'Show More' : 'Show Less'}}</button>
+          <button ng-show='isAuth()' ng-click='loadMore1()'>{{lim1 === 3 ? 'Show More' : 'Show Less'}}</button>
         </div>
 
         <div flex>
           <h2>{{city2 || 'Custom 2'}} News</h2>
-          <form>
+          <form ng-show='isAuth()'>
             <input ng-model='city2' type="text" name="city2">
             <input ng-click='initializeCustom2(city2)' type="submit" value="Save">
           </form>
           <br>
-          <div ng-repeat='news in custom2news | limitTo:lim2'>
+          <p ng-hide='isAuth()'>Here is another! Sign up for a free account now!</p>
+          <div ng-show='isAuth()' ng-repeat='news in custom2news | limitTo:lim2'>
             <a ng-href="{{ news.url}}">
               <img class='tile' ng-src='{{ news.image.thumbnail.contentUrl}}'>
               <p>{{ news.name}}</p>
@@ -89,7 +93,7 @@
             <p>{{ news.description}}</p>
             <p>{{ news.datePublished}}</p>
           </div>
-          <button ng-click='loadMore2()'>{{lim2 === 3 ? 'Show More' : 'Show Less'}}</button>
+          <button ng-show='isAuth()' ng-click='loadMore2()'>{{lim2 === 3 ? 'Show More' : 'Show Less'}}</button>
         </div>
       </div>
 
@@ -124,17 +128,17 @@
       <div style="visibility: hidden">
         <div class="md-dialog-container" id="signInDialog">
           <md-dialog>
-            <form name="loginForm" data-ng-submit="handleSignIn()">
+            <form name="loginForm" data-ng-submit="login()">
               <md-dialog-content>
                   <div class="md-dialog-content">
                       <md-input-container class="md-block">
                           <label>Username:</label>
-                          <input ng-model="username" required>
+                          <input ng-model="user.username" required>
                       </md-input-container>
 
                       <md-input-container class="md-block">
                           <label>Password:</label>
-                          <input ng-model="password" type="password" required>
+                          <input ng-model="user.password" type="password" required>
                       </md-input-container>
                   </div>
               </md-dialog-content>
@@ -156,22 +160,22 @@
       <div style="visibility: hidden">
         <div class="md-dialog-container" id="signUpDialog">
           <md-dialog>
-            <form name="signupForm" data-ng-submit="handleSignUp()">
+            <form name="signupForm" data-ng-submit="signup()">
               <md-dialog-content>
                   <div class="md-dialog-content">
                       <md-input-container class="md-block">
                           <label>Username:</label>
-                          <input ng-model="username" required>
+                          <input ng-model="user.username" required>
                       </md-input-container>
 
                       <md-input-container class="md-block">
                           <label>Password:</label>
-                          <input ng-model="password" type="password" required>
+                          <input ng-model="user.password" type="password" required>
                       </md-input-container>
 
                       <md-input-container class="md-block">
                           <label>Password Confirm:</label>
-                          <input ng-model="confirm" type="password" required>
+                          <input ng-model="user.confirm" type="password" required>
                       </md-input-container>
                   </div>
               </md-dialog-content>
@@ -201,7 +205,6 @@
       <script src="lib/angular-route/angular-route.js"></script>
 
       <script src="app/services/services.js"></script>
-      <script src="app/authentication/authentication.js"></script>
       <script src="app/defaultNews/defaultNews.js"></script>
       <script src="app/localNews/localNews.js"></script>
       <script src="app/customNews/customNews.js"></script>
