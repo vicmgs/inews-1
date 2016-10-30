@@ -84,7 +84,6 @@ angular
       return resp;
     })
     .catch(function(err) {
-      // Handle if the user already existsi
       throw(err);
     });
   };
@@ -102,5 +101,25 @@ angular
     signup: signup,
     logout: logout,
     isAuth: isAuth
+  };
+})
+.factory('CustomNewsService', function($http, $window) {
+
+  var edit = function(user) {
+    return $http({
+      method: 'PUT',
+      url: '/api/user/' + user.username,
+      data: user
+    })
+    .then(function(resp) {
+      return resp;
+    })
+    .catch(function(err) {
+      throw(err);
+    });
+  };
+
+  return {
+    edit: edit
   };
 });
