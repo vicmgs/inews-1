@@ -42,7 +42,7 @@ router.route('/')
   .then(function(content){
     var info = JSON.parse(content.body);
     //send news back to user client
-    res.send(info.value);//the news array is in this value property
+    res.status(200).send(info.value);//the news array is in this value property
   });
 
 });
