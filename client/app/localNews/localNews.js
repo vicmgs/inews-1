@@ -10,6 +10,8 @@ angular.module('inews.localNews', [])
 
   $scope.lat;
   $scope.long;
+  $scope.isLocNewsLoading = false;
+  $scope.isSearchNewsLoading = false;
 
   $scope.loadMore1 = function() {
     if ($scope.lim1 === 3) $scope.lim1 = 10;
@@ -22,12 +24,14 @@ angular.module('inews.localNews', [])
   }
 
   var initializeLocalNews = function(lat, long) {
+    $scope.isLocNewsLoading = true;
     News.getNeighborhood(lat, long)
       .then(function(data) {
         return News.getBingNews(data.neighbourhood + '+' + data.city + '+' + data.state);
       })
       .then(function(data) {
         $scope.localnews = JSON.parse(String(data.data.body)).value;
+        $scope.isLocNewsLoading = false;
       })
       .catch(function(error) {
         console.log(error);
@@ -35,9 +39,11 @@ angular.module('inews.localNews', [])
   }
 
   $scope.initializeSearch = function(query1) {
+     $scope.isSearchNewsLoading = true;
       News.getBingNews(query1)
       .then(function(data) {
         $scope.searchnews = JSON.parse(String(data.data.body)).value;
+        $scope.isSearchNewsLoading = false;
       })
       .catch(function(error) {
         console.log(error);

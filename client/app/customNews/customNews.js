@@ -5,6 +5,8 @@ angular.module('inews.customNews', [])
 .controller('customNewsController', function($http, $scope, News, $location, CustomNewsService, $window) {
   $scope.custom1news = {};
   $scope.custom2news = {};
+  $scope.isCustom1newsLoading = false;
+  $scope.isCustom2newsLoading = false;
 
   $scope.lim1 = 3;
   $scope.lim2 = 3;
@@ -22,9 +24,11 @@ angular.module('inews.customNews', [])
   $scope.initializeCustom1 = function(query1) {
     CustomNewsService.edit({user: $window.localStorage['com.inews'], field: 'customnews1', value: query1})
     .then(function(resp){
+      $scope.isCustom1newsLoading = true;
       News.getBingNews(query1)
       .then(function(data) {
         $scope.custom1news = JSON.parse(String(data.data.body)).value;
+        $scope.isCustom1newsLoading = false;
       })
       .catch(function(error) {
         console.log(error);
@@ -35,9 +39,11 @@ angular.module('inews.customNews', [])
   $scope.initializeCustom2 = function(query2) {
     CustomNewsService.edit({user: $window.localStorage['com.inews'], field: 'customnews2', value: query2})
     .then(function(resp){
+      $scope.isCustom2newsLoading = true;
       News.getBingNews(query2)
       .then(function(data) {
         $scope.custom2news = JSON.parse(String(data.data.body)).value;
+        $scope.isCustom2newsLoading = false;
       })
       .catch(function(error) {
         console.log(error);
