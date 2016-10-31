@@ -31,7 +31,10 @@ router.route('/edit')
 .put(function(req, res) {
   //searh db for username prefs by username
   var user = jwt.decode(req.body.user, 'secret');
-  userPrefController.updateOne(user[0].username, req.body.field, req.body.value, function(err, data) {
+  if (user.username === undefined) {
+    user = user[0];
+  }
+  userPrefController.updateOne(user.username, req.body.field, req.body.value, function(err, data) {
     if(err) {
       console.error(err);
     } else {
