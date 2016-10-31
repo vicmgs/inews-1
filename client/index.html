@@ -21,6 +21,7 @@
         <md-button ng-show='isAuth()' ng-click="logout()" class="md-raised">
           Sign Out
         </md-button>
+        <p>{{error}}</p>
       </div>
 
       <div layout='row' layout-xs="column" layout-margin ng-controller='localNewsController' id='LocalNews'>

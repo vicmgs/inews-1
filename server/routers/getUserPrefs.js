@@ -51,6 +51,7 @@ router.route('/signup')
     userPrefController.insertOne({username: req.body.username, password: req.body.password}, function(err, data) {
       if(err) {
         console.error(err);
+        res.status(201).send('Cannot create new user');
       } else {
         var token = jwt.encode(data, 'secret');
         res.status(201).send(token);
@@ -72,13 +73,17 @@ router.route('/login')
     if(err) {
       console.error(err);
     } else {
-      data[0].comparePasswords(password)
-      .then(function(valid){
-        var token = jwt.encode(data, 'secret');
-        res.status(201).send(token);
-      });
+      if (data[0]) {
+        data[0].comparePasswords(password)
+        .then(function(){
+          var token = jwt.encode(data, 'secret');
+          res.status(201).send(token);
+        });
+      } else {
+        res.status(201).send('User does not exist');
+      }
     }
-  })
+  });
 });
 
 

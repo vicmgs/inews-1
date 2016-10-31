@@ -6,6 +6,7 @@ angular.module('inews.navigation', [])
   $scope.user = {};
 
   $scope.signinshow = function() {
+    $scope.error = '';
     $mdDialog.show({
       contentElement: '#signInDialog',
       parent: angular.element(document.body)
@@ -20,6 +21,7 @@ angular.module('inews.navigation', [])
   };
 
   $scope.signupshow = function() {
+    $scope.error = '';
     $mdDialog.show({
       contentElement: '#signUpDialog',
       parent: angular.element(document.body)
@@ -28,30 +30,46 @@ angular.module('inews.navigation', [])
 
   $scope.signupCancel = function() {
     $mdDialog.hide({
-      contentElement: '#signInDialog',
+      contentElement: '#signUpDialog',
       parent: angular.element(document.body)
     });
   };
 
   $scope.signup = function() {
     AuthenticationService.signup($scope.user).then(function(resp) {
-      $window.localStorage.setItem('com.inews', resp.data);
-      $mdDialog.hide({
-        contentElement: '#signInDialog',
-        parent: angular.element(document.body)
-      });
+      if (resp.data !== 'Cannot create new user') {
+        $window.localStorage.setItem('com.inews', resp.data);
+        $mdDialog.hide({
+          contentElement: '#signUpDialog',
+          parent: angular.element(document.body)
+        });
+      } else {
+        $mdDialog.hide({
+          contentElement: '#signUpDialog',
+          parent: angular.element(document.body)
+        });
+        $scope.error = resp.data;
+      }
     });
   };
 
   $scope.login = function() {
     AuthenticationService.login($scope.user).then(function(resp) {
-      $window.localStorage.setItem('com.inews', resp.data);
-      $mdDialog.hide({
-        contentElement: '#signInDialog',
-        parent: angular.element(document.body)
-      });
+      if (resp.data !== 'User does not exist') {
+        $window.localStorage.setItem('com.inews', resp.data);
+        $mdDialog.hide({
+          contentElement: '#signInDialog',
+          parent: angular.element(document.body)
+        });
+        $scope.$broadcast('signedin', $scope.user.username);
+      } else {
+        $mdDialog.hide({
+          contentElement: '#signInDialog',
+          parent: angular.element(document.body)
+        });
+        $scope.error = resp.data;
+      }
     });
-    $scope.$broadcast('signedin', $scope.user.username);
   };
 
   $scope.logout = function() {
