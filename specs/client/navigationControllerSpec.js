@@ -49,47 +49,47 @@ describe('Navigation controller', function() {
     expect($scope.isAuth).to.be.a('function');
   });
 
-  it('should store username in localStorage after signup', function() {
-    var username = 'peterpan';
+  it('should store token in localStorage after signup', function() {
+    var fakeToken = 'eewwlleerraaii23kkww';
 
-    $httpBackend.expect('POST', '/api/user/signup').respond({username: username});
+    $httpBackend.expect('POST', '/api/user/signup').respond(fakeToken);
     $scope.signup();
     $httpBackend.flush();
-    expect($window.localStorage.getItem('com.inews')).to.equal(username);
+    expect($window.localStorage.getItem('com.inews')).to.equal(fakeToken);
   });
 
   it('should store token in localStorage after login', function() {
-    var username = 'peterpan';
+    var fakeToken = 'eewwlleerraaii23kkww';
 
-    $httpBackend.expect('POST', '/api/user/login').respond({username: username});
+    $httpBackend.expect('POST', '/api/user/login').respond(fakeToken);
     $scope.login();
     $httpBackend.flush();
-    expect($window.localStorage.getItem('com.inews')).to.equal(username);
+    expect($window.localStorage.getItem('com.inews')).to.equal(fakeToken);
   });
 
   it('should remove token from localStorage after logout', function() {
-    var username = 'peterpan';
+    var fakeToken = 'eewwlleerraaii23kkww';
 
-    $httpBackend.expect('POST', '/api/user/login').respond({username: username});
+    $httpBackend.expect('POST', '/api/user/login').respond({data: fakeToken});
     $scope.login();
     $httpBackend.flush();
     $scope.logout();
     expect($window.localStorage.getItem('com.inews')).to.be.null;
   });
 
-  xit('should return true on isValid method after login', function() {
+  it('should return true on isValid method after login', function() {
     var fakeToken = 'eewwlleerraaii23kkww';
 
-    $httpBackend.expect('POST', '/api/user/login').respond({token: fakeToken});
+    $httpBackend.expect('POST', '/api/user/login').respond({data: fakeToken});
     $scope.login();
     $httpBackend.flush();
     expect($scope.isAuth()).to.equal(true);
   });
 
-  xit('should return false on isValid method after logout', function() {
+  it('should return false on isValid method after logout', function() {
     var fakeToken = 'eewwlleerraaii23kkww';
 
-    $httpBackend.expect('POST', '/api/user/login').respond({token: fakeToken});
+    $httpBackend.expect('POST', '/api/user/login').respond({data: fakeToken});
     $scope.login();
     $httpBackend.flush();
     $scope.logout();
