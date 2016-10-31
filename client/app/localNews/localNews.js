@@ -27,7 +27,7 @@ angular.module('inews.localNews', [])
         return News.getBingNews(data.neighbourhood + '+' + data.city + '+' + data.state);
       })
       .then(function(data) {
-        $scope.localnews = data.data.value;
+        $scope.localnews = JSON.parse(String(data.data.body)).value;
       })
       .catch(function(error) {
         console.log(error);
@@ -37,7 +37,7 @@ angular.module('inews.localNews', [])
   $scope.initializeSearch = function(query1) {
       News.getBingNews(query1)
       .then(function(data) {
-        $scope.searchnews = data.data.value;
+        $scope.searchnews = JSON.parse(String(data.data.body)).value;
       })
       .catch(function(error) {
         console.log(error);
@@ -51,5 +51,9 @@ angular.module('inews.localNews', [])
       initializeLocalNews($scope.lat, $scope.long);
     });
   }
+
+  $scope.$on('signedout', function(event) {
+    $scope.searchnews = {};
+  });
 
 });

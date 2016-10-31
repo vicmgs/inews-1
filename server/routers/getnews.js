@@ -26,12 +26,9 @@ var router = express.Router();
 router.route('/')
 //we fire a Get request to bing in response to a request for news to our site
 .get(function(req, res) {
-  var bingquery = 'https://api.cognitive.microsoft.com/bing/v5.0/news/?location=SanFrancisco';
-
-  //request options obj
   var options = {
     method: 'GET',
-    url: bingquery,
+    url: 'https://api.cognitive.microsoft.com/bing/v5.0/news/search?q=' + req.query.search + '&count=10&offset=0&mkt=en-us&safeSearch=Moderate',
     headers: {
           // Request headers
           'Ocp-Apim-Subscription-Key': API_KEY
@@ -40,9 +37,7 @@ router.route('/')
   //get request to bing with our bing API key
   request(options)
   .then(function(content){
-    var info = JSON.parse(content.body);
-    //send news back to user client
-    res.status(200).send(info.value);//the news array is in this value property
+    res.status(200).send(content);//the news array is in this value property
   });
 
 });

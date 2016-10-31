@@ -20,11 +20,11 @@ angular.module('inews.customNews', [])
   }
 
   $scope.initializeCustom1 = function(query1) {
-    CustomNewsService.edit({username: $window.localStorage['com.inews'], field: 'customnews1', value: query1})
+    CustomNewsService.edit({user: $window.localStorage['com.inews'], field: 'customnews1', value: query1})
     .then(function(resp){
       News.getBingNews(query1)
       .then(function(data) {
-        $scope.custom1news = data.data.value;
+        $scope.custom1news = JSON.parse(String(data.data.body)).value;
       })
       .catch(function(error) {
         console.log(error);
@@ -33,11 +33,11 @@ angular.module('inews.customNews', [])
   };
 
   $scope.initializeCustom2 = function(query2) {
-    CustomNewsService.edit({username: $window.localStorage['com.inews'], field: 'customnews2', value: query2})
+    CustomNewsService.edit({user: $window.localStorage['com.inews'], field: 'customnews2', value: query2})
     .then(function(resp){
       News.getBingNews(query2)
       .then(function(data) {
-        $scope.custom2news = data.data.value;
+        $scope.custom2news = JSON.parse(String(data.data.body)).value;
       })
       .catch(function(error) {
         console.log(error);
@@ -55,7 +55,7 @@ angular.module('inews.customNews', [])
         News.getBingNews(resp.data[0].customnews1)
         .then(function(data) {
           $scope.city1 = resp.data[0].customnews1;
-          $scope.custom1news = data.data.value;
+          $scope.custom1news = JSON.parse(String(data.data.body)).value;
         })
         .catch(function(error) {
           console.log(error);
@@ -66,7 +66,7 @@ angular.module('inews.customNews', [])
         News.getBingNews(resp.data[0].customnews2)
         .then(function(data) {
           $scope.city2 = resp.data[0].customnews2;
-          $scope.custom2news = data.data.value;
+          $scope.custom2news = JSON.parse(String(data.data.body)).value;
         })
         .catch(function(error) {
           console.log(error);
