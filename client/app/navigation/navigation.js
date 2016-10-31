@@ -35,7 +35,7 @@ angular.module('inews.navigation', [])
 
   $scope.signup = function() {
     AuthenticationService.signup($scope.user).then(function(resp) {
-      $window.localStorage.setItem('com.inews', resp.data.username);
+      $window.localStorage.setItem('com.inews', resp.data);
       $mdDialog.hide({
         contentElement: '#signInDialog',
         parent: angular.element(document.body)
@@ -45,7 +45,7 @@ angular.module('inews.navigation', [])
 
   $scope.login = function() {
     AuthenticationService.login($scope.user).then(function(resp) {
-      $window.localStorage.setItem('com.inews', resp.data.username);
+      $window.localStorage.setItem('com.inews', resp.data);
       $mdDialog.hide({
         contentElement: '#signInDialog',
         parent: angular.element(document.body)

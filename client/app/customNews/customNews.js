@@ -20,7 +20,7 @@ angular.module('inews.customNews', [])
   }
 
   $scope.initializeCustom1 = function(query1) {
-    CustomNewsService.edit({username: $window.localStorage['com.inews'], field: 'customnews1', value: query1})
+    CustomNewsService.edit({user: $window.localStorage['com.inews'], field: 'customnews1', value: query1})
     .then(function(resp){
       News.getBingNews(query1)
       .then(function(data) {
@@ -33,7 +33,7 @@ angular.module('inews.customNews', [])
   };
 
   $scope.initializeCustom2 = function(query2) {
-    CustomNewsService.edit({username: $window.localStorage['com.inews'], field: 'customnews2', value: query2})
+    CustomNewsService.edit({user: $window.localStorage['com.inews'], field: 'customnews2', value: query2})
     .then(function(resp){
       News.getBingNews(query2)
       .then(function(data) {

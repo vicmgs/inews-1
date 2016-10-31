@@ -108,7 +108,7 @@ angular
   var edit = function(user) {
     return $http({
       method: 'PUT',
-      url: '/api/user/' + user.username,
+      url: '/api/user/edit',
       data: user
     })
     .then(function(resp) {
